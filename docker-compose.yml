@@ -1,6 +1,6 @@
 services:
   shop:
-    container_name: 'selffastapi'
+    container_name: 'app'
     build:
       dockerfile: ./Dockerfile
     command:
@@ -15,7 +15,6 @@ services:
       driver: loki
       options:
         loki-url: http://147.45.143.184:3100/loki/api/v1/push
-
 
   db:
     image: postgres:16.2
@@ -74,10 +73,11 @@ services:
     environment:
       KAFKA_BROKER_ID: 1
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://147.45.185.77:9092
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
       KAFKA_LOG_RETENTION_HOURS: 24
       KAFKA_AUTO_CREATE_TOPICS_ENABLE: true
+      KAFKA_HEAP_OPTS: -Xmx512m
     logging:
       driver: loki
       options:
@@ -90,3 +90,4 @@ volumes:
     driver: local
   db_data:
     driver: local
+
