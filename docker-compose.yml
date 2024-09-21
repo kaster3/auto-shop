@@ -1,5 +1,5 @@
 services:
-  app:
+  shop:
     container_name: 'selffastapi'
     build:
       dockerfile: ./Dockerfile
