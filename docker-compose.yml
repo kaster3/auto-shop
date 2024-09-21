@@ -1,6 +1,6 @@
 services:
   shop:
-    container_name: 'app'
+    container_name: 'shop_app'
     build:
       dockerfile: ./Dockerfile
     command:
