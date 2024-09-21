@@ -11,8 +11,6 @@ services:
     restart: always
     env_file:
       - .env
-    networks:
-      - mynet
     logging:
       driver: loki
       options:
@@ -32,8 +30,6 @@ services:
       - "5432:5432"
     volumes:
       - db_data:/var/lib/postgresql/data
-    networks:
-      - mynet
     logging:
       driver: loki
       options:
@@ -45,8 +41,6 @@ services:
     restart: always
     ports:
       - "6379:6379"
-    networks:
-      - mynet
 
   pgadmin:
     image: dpage/pgadmin4
@@ -65,8 +59,6 @@ services:
       ZOOKEEPER_TICK_TIME: 2000
     ports:
       - "2181:2181"
-    networks:
-      - mynet
     logging:
       driver: loki
       options:
@@ -86,8 +78,6 @@ services:
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
       KAFKA_LOG_RETENTION_HOURS: 24
       KAFKA_AUTO_CREATE_TOPICS_ENABLE: true
-    networks:
-      - mynet
     logging:
       driver: loki
       options:
@@ -100,8 +90,3 @@ volumes:
     driver: local
   db_data:
     driver: local
-
-networks:
-  mynet:
-    driver: bridge
-    external: true
